@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import shutil
 import json
+from torchvision import transforms
+from torchtext.vocab import vocab
+from collections import Counter
 
 def get_imageid(filename):
     id_image = filename.split('_')[-1].split('.')[0]
@@ -86,6 +89,29 @@ def plot_images(df, img_path, num_images=5):
         plt.title(caption)
         plt.imshow(row_image)
         plt.axis("off")
+        
+def get_transform(
+        side_size = 256,
+        mean = [0.45, 0.45, 0.45],
+        std = [0.225, 0.225, 0.225],
+        crop_size = 224
+    ):
+    
+    transform=transforms.Compose([
+            transforms.Resize(side_size),              
+            transforms.RandomCrop(crop_size),                  
+            transforms.RandomHorizontalFlip(),           
+            transforms.ToTensor(),                       
+            transforms.Normalize(mean, std)
+    ])
+    return transform
+
+def get_vocab(df, tokenizer):
+    counter = Counter()
+    for _, row in df.iterrows():
+        words_de = row["captions"].lower() 
+        counter.update(tokenizer(words_de))
+    return vocab(counter, specials=['<unk>', '<pad>', '<bos>', '<eos>'])
 
 if __name__ == '__main__':
     data_path = 'data'
