@@ -5,6 +5,8 @@ import os
 from textwrap import wrap
 import matplotlib.pyplot as plt
 from PIL import Image
+import shutil
+import json
 
 def get_imageid(filename):
     id_image = filename.split('_')[-1].split('.')[0]
@@ -28,13 +30,20 @@ def get_annot_by_imageid(data_json, unique=False):
 def download_captions():
     print('Downloading JSON files - captions')
     remote_url = 'http://images.cocodataset.org/annotations/annotations_trainval2014.zip'
+    
     local_file = 'data/annotations_trainval2014.zip'
-    wget.download(remote_url, local_file)
+    
+    if not os.path.exists(local_file):
+        wget.download(remote_url, local_file)
 
     with zipfile.ZipFile(local_file, 'r') as zip:
         zip.extractall('data')
+    for file_json in os.listdir(os.path.join('data', 'annotations')):
+        shutil.move(
+            os.path.join('data', 'annotations', file_json), 
+            os.path.join('data', file_json))
 
-def download_images(data_json, annot_by_imageid):
+def download_images(data_json, annot_by_imageid, number_images=82783):
     print('Downloading JPG files - images')
     imgs = {
         'id':[],
@@ -43,7 +52,7 @@ def download_images(data_json, annot_by_imageid):
     }
     imgs_path = "data/img"
 
-    for img in tqdm(data_json['images']):
+    for img in tqdm(data_json['images'][:number_images]):
         try:
             remote_url = img['coco_url']
             local_file = os.path.join(imgs_path, img['file_name'])
