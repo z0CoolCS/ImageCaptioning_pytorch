@@ -41,7 +41,7 @@ class ImageCaptionDataset(Dataset):
         return self.size
 
     def __getitem__(self, idx):
-        img = Image.open(os.path.join(self.img_path, self.df.iloc[idx]['filename']))
+        img = Image.open(os.path.join(self.img_path, self.df.iloc[idx]['filename'])).convert('RGB')
         caption = self.df.iloc[idx]["captions"]
 
         if self.transform:

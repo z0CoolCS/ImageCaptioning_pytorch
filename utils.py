@@ -82,17 +82,26 @@ def get_transform(
         side_size = 256,
         mean = [0.45, 0.45, 0.45],
         std = [0.225, 0.225, 0.225],
-        crop_size = 224
+        crop_size = 224,
+        typeset = "train"
     ):
-    
-    transform=transforms.Compose([
-            transforms.Resize(side_size),              
-            transforms.RandomCrop(crop_size),                  
-            transforms.RandomHorizontalFlip(),           
-            transforms.ToTensor(),                       
-            transforms.Normalize(mean, std)
-    ])
-    return transform
+    if typeset == "train":
+        return transforms.Compose([
+                transforms.Resize(side_size),              
+                transforms.RandomCrop(crop_size),                  
+                transforms.RandomHorizontalFlip(),           
+                transforms.ToTensor(),                       
+                transforms.Normalize(mean, std)
+        ])
+    else:
+        return transforms.Compose([
+                transforms.Resize(side_size),              
+                transforms.RandomCrop(crop_size),                  
+                transforms.RandomHorizontalFlip(),           
+                transforms.ToTensor(),                       
+                transforms.Normalize(mean, std)
+        ])
+        
 
 def get_vocab(df, tokenizer):
     counter = Counter()
