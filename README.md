@@ -10,7 +10,8 @@ cd ImageCaptioning_pytorch
 
 ## Create workspace
 ```sh
-mkdir -p data/img
+mkdir -p data/img/train
+mkdir -p data/img/val
 ```
 
 ## Download JSON and JPG files
