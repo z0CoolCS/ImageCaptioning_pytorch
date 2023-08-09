@@ -69,6 +69,7 @@ def train_model(model, train_loader, val_loader, optimizer, criterion, vocab_siz
 
         loss_epoch = validation_stage(model, val_loader, criterion, vocab_size)   
         loss_total_val.append(loss_epoch)
+        
         stats = '\nEpoch [%d], Loss Train: %.4f, Loss Val: %.4f \n' % (epoch, loss_total_train[-1], loss_total_val[-1])
         print(stats)
 
@@ -127,7 +128,7 @@ def main():
         optimizer=optimizer,
         criterion=criterion,
         vocab_size=vocab_size,
-        epochs=5,
+        epochs=20,
         save_model=save_model
         )
 

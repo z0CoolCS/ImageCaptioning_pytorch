@@ -32,7 +32,7 @@ class DecoderRNN(nn.Module):
         self.embed_size= embed_size
         self.drop_prob= 0.2
         self.vocabulary_size = vocab_size
-        self.lstm = nn.LSTM(self.embed_size, self.hidden_size , self.num_layers,batch_first=True)
+        self.lstm = nn.LSTM(self.embed_size, self.hidden_size , self.num_layers, batch_first=True)
         self.dropout = nn.Dropout(self.drop_prob)
         self.embed = nn.Embedding(self.vocabulary_size, self.embed_size)
         self.linear = nn.Linear(hidden_size, self.vocabulary_size)
@@ -65,3 +65,4 @@ class ImageCaptionModel(nn.Module):
         outputs = self.decoder(features, labels)
 
         return outputs
+   

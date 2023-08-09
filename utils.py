@@ -7,6 +7,7 @@ from torchvision import transforms
 from torchtext.vocab import vocab
 from collections import Counter
 import pandas as pd
+import numpy as np
 
 def get_imageid(filename):
     id_image = filename.split('_')[-1].split('.')[0]
@@ -120,3 +121,4 @@ def load_images(captions_json, imgs_path):
     df_val = pd.DataFrame(imgs_val)
 
     return df_train, df_val
+
