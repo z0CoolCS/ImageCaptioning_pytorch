@@ -16,6 +16,6 @@ mkdir -p data/img/val
 
 ## Download JSON and JPG files
 ```sh
-python -m utils
+python -m download_data
 ```
 
