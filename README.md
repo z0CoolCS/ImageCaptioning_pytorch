@@ -19,4 +19,15 @@ mkdir -p checkpts
 ```sh
 python -m download_data
 ```
+## Train the Image Caption Model
+```sh
+python -m main
+```
 
+## Predict with trained model
+```sh
+python -m predict
+```
+
+## Results
+![](imgs/training_loss.png)
