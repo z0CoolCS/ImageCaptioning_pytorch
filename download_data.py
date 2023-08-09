@@ -3,6 +3,7 @@ import os
 import shutil
 import zipfile
 import wget
+from tqdm.auto import tqdm
 
 def download_captions():
     print('Downloading JSON files - captions')

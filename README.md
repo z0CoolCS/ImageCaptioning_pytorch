@@ -12,6 +12,7 @@ cd ImageCaptioning_pytorch
 ```sh
 mkdir -p data/img/train
 mkdir -p data/img/val
+mkdir -p checkpts
 ```
 
 ## Download JSON and JPG files
